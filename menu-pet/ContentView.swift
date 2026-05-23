@@ -25,9 +25,15 @@ struct ContentView: View {
             if currentPage == .care {
                 CarePanel(
                     petStore: petStore,
+                    openEquipment: { currentPage = .equipment },
                     openSkill: { currentPage = .skills },
                     openWarehouse: { currentPage = .warehouse },
                     openMerchant: { currentPage = .merchant }
+                )
+            } else if currentPage == .equipment {
+                EquipmentPage(
+                    petStore: petStore,
+                    closeEquipment: { currentPage = .care }
                 )
             } else if currentPage == .skills {
                 SkillPage(
@@ -126,6 +132,7 @@ private struct CurrencyValue: View {
 
 private enum Page {
     case care
+    case equipment
     case skills
     case warehouse
     case merchant
@@ -133,6 +140,7 @@ private enum Page {
 
 private struct CarePanel: View {
     @ObservedObject var petStore: PetStore
+    let openEquipment: () -> Void
     let openSkill: () -> Void
     let openWarehouse: () -> Void
     let openMerchant: () -> Void
@@ -162,6 +170,7 @@ private struct CarePanel: View {
 
                 FunctionPanel(
                     hasCultivator: petStore.ownedPets.isEmpty == false,
+                    openEquipment: openEquipment,
                     openSkill: openSkill,
                     openWarehouse: openWarehouse,
                     openMerchant: openMerchant
@@ -267,6 +276,7 @@ private struct CultivatorPortraitCard: View {
 
 private struct FunctionPanel: View {
     let hasCultivator: Bool
+    let openEquipment: () -> Void
     let openSkill: () -> Void
     let openWarehouse: () -> Void
     let openMerchant: () -> Void
@@ -305,6 +315,17 @@ private struct FunctionPanel: View {
             .accessibilityLabel("技能")
             .disabled(hasCultivator == false)
 
+            Button(action: openEquipment) {
+                Image("EquipmentIcon")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 48, height: 48)
+                    .padding(.vertical, 2)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("装备")
+            .disabled(hasCultivator == false)
+
             Spacer()
         }
         .padding(12)
@@ -314,6 +335,71 @@ private struct FunctionPanel: View {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(.separator.opacity(0.5), lineWidth: 1)
         )
+    }
+}
+
+private struct EquipmentPage: View {
+    @ObservedObject var petStore: PetStore
+    let closeEquipment: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Button("返回", action: closeEquipment)
+                    .buttonStyle(.bordered)
+
+                Spacer()
+
+                Text("装备")
+                    .font(.headline)
+
+                Spacer()
+
+                Color.clear
+                    .frame(width: 44, height: 1)
+            }
+
+            VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("当前穿戴")
+                        .font(.subheadline.weight(.semibold))
+
+                    ForEach(EquipmentSlot.allCases) { slot in
+                        EquippedSlotRow(
+                            slot: slot,
+                            item: petStore.equippedItem(for: slot),
+                            actionTitle: "卸下",
+                            canAct: petStore.canUnequip(slot)
+                        ) {
+                            petStore.unequip(slot)
+                        }
+                    }
+                }
+
+                if petStore.ownedEquipmentItems.isEmpty {
+                    Text("当前没有可装备的背包装备")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                } else {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("背包装备")
+                            .font(.subheadline.weight(.semibold))
+
+                        ForEach(petStore.ownedEquipmentItems) { item in
+                            EquipmentInventoryRow(
+                                item: item,
+                                count: petStore.equipmentCount(for: item),
+                                equippedItem: petStore.equippedItem(for: item.slot),
+                                canEquip: petStore.canEquip(item),
+                                actionTitle: petStore.equippedItem(for: item.slot) == item ? "已装备" : "装备"
+                            ) {
+                                petStore.equip(item)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -408,6 +494,10 @@ private struct SkillPage: View {
 private struct InteractionPanel: View {
     @ObservedObject var petStore: PetStore
     @State private var isChoosingHuntMap = false
+    private let playerNameColor = Color(red: 0.28, green: 0.56, blue: 0.72)
+    private let monsterNameColor = Color(red: 0.74, green: 0.66, blue: 0.42)
+    private let battleLineColor = Color(red: 0.72, green: 0.38, blue: 0.38)
+    private let infoLineColor = Color(red: 0.30, green: 0.58, blue: 0.38)
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -516,20 +606,22 @@ private struct InteractionPanel: View {
 
                 if petStore.battleLog.isEmpty == false {
                     VStack(alignment: .leading, spacing: 6) {
-                        ForEach(Array(petStore.battleLog.suffix(2).enumerated()), id: \.offset) { _, line in
-                            let isBattleLine = line.contains("对") && line.contains("造成了")
-                            Text("\(isBattleLine ? "【战斗】" : "【信息】")\(line)")
-                            .font(.callout)
-                            .foregroundStyle(
-                                isBattleLine
-                                ? Color(red: 0.72, green: 0.38, blue: 0.38)
-                                : Color(red: 0.30, green: 0.58, blue: 0.38)
-                            )
-                            .lineLimit(2)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        let visibleLines = Array(petStore.battleLog.enumerated().suffix(3))
+                        ForEach(visibleLines, id: \.offset) { entry in
+                            styledBattleLogLine(entry.element)
+                                .font(.callout)
+                                .lineLimit(2)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .transition(
+                                    .asymmetric(
+                                        insertion: .move(edge: .bottom),
+                                        removal: .move(edge: .top)
+                                    )
+                                )
                         }
                     }
+                    .animation(.easeInOut(duration: 0.28), value: petStore.battleLog)
                     .padding(10)
                     .background(.quaternary.opacity(0.18), in: RoundedRectangle(cornerRadius: 10))
                 }
@@ -546,6 +638,94 @@ private struct InteractionPanel: View {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(.separator.opacity(0.5), lineWidth: 1)
         )
+    }
+
+    private func styledBattleLogLine(_ line: String) -> Text {
+        Text(styledBattleLogString(line))
+    }
+
+    private func styledBattleLogString(_ line: String) -> AttributedString {
+        let isBattleLine = line.contains("对") && line.contains("造成了")
+        let defaultColor = isBattleLine ? battleLineColor : infoLineColor
+        var result = AttributedString("\(isBattleLine ? "【战斗】" : "【信息】")\(line)")
+        result.foregroundColor = defaultColor
+
+        let fullText = String(result.characters)
+        tintOccurrences(of: petStore.petName, in: fullText, color: playerNameColor, target: &result)
+        tintMonsterNames(in: line, fullText: fullText, defaultColor: defaultColor, target: &result)
+        return result
+    }
+
+    private func tintMonsterNames(in line: String, fullText: String, defaultColor: Color, target: inout AttributedString) {
+        var monsterNames: [String] = []
+
+        if let (first, second) = extractTwoNames(in: line, separator: "对", suffix: "造成了") {
+            monsterNames.append(contentsOf: [first, second].filter { $0 != petStore.petName })
+        }
+        if let (first, second) = extractTwoNames(in: line, separator: "击败了", suffix: "，") {
+            monsterNames.append(contentsOf: [first, second].filter { $0 != petStore.petName })
+        }
+        if let (first, second) = extractTwoNames(in: line, separator: "倒在了", suffix: "手下。") {
+            monsterNames.append(contentsOf: [first, second].filter { $0 != petStore.petName })
+        }
+        if let encounter = extractEncounterParts(from: line) {
+            monsterNames.append(encounter.monster)
+        }
+        if let monster = extractSingleName(in: line, separator: "被镇压，") {
+            monsterNames.append(monster)
+        }
+        if let monster = extractSingleName(in: line, separator: "持续流失") {
+            monsterNames.append(monster)
+        }
+        if let caster = extractSingleName(in: line, separator: "施放"), caster != petStore.petName {
+            monsterNames.append(caster)
+        }
+        if let user = extractSingleName(in: line, separator: "自动使用"), user != petStore.petName {
+            monsterNames.append(user)
+        }
+
+        for monsterName in Set(monsterNames).sorted(by: { $0.count > $1.count }) {
+            tintOccurrences(of: monsterName, in: fullText, color: monsterNameColor, target: &target)
+        }
+    }
+
+    private func extractTwoNames(in line: String, separator: String, suffix: String) -> (String, String)? {
+        guard let separatorRange = line.range(of: separator),
+              let suffixRange = line.range(of: suffix) else { return nil }
+        let first = String(line[..<separatorRange.lowerBound])
+        let second = String(line[separatorRange.upperBound..<suffixRange.lowerBound])
+        guard first.isEmpty == false, second.isEmpty == false else { return nil }
+        return (first, second)
+    }
+
+    private func extractEncounterParts(from line: String) -> (location: String, monster: String, suffix: String)? {
+        guard line.hasPrefix("在"),
+              let encounterRange = line.range(of: "遇到了"),
+              let levelStartRange = line.range(of: "（", options: .backwards) else { return nil }
+        let location = String(line[line.index(after: line.startIndex)..<encounterRange.lowerBound])
+        let monster = String(line[encounterRange.upperBound..<levelStartRange.lowerBound])
+        let suffix = String(line[levelStartRange.lowerBound...])
+        guard location.isEmpty == false, monster.isEmpty == false else { return nil }
+        return (location, monster, suffix)
+    }
+
+    private func extractSingleName(in line: String, separator: String) -> String? {
+        guard let separatorRange = line.range(of: separator) else { return nil }
+        let candidate = String(line[..<separatorRange.lowerBound])
+        return candidate.isEmpty ? nil : candidate
+    }
+
+    private func tintOccurrences(of needle: String, in haystack: String, color: Color, target: inout AttributedString) {
+        guard needle.isEmpty == false else { return }
+        var searchRange = haystack.startIndex..<haystack.endIndex
+
+        while let range = haystack.range(of: needle, options: [], range: searchRange) {
+            if let lower = AttributedString.Index(range.lowerBound, within: target),
+               let upper = AttributedString.Index(range.upperBound, within: target) {
+                target[lower..<upper].foregroundColor = color
+            }
+            searchRange = range.upperBound..<haystack.endIndex
+        }
     }
 
 }
@@ -603,7 +783,11 @@ private struct WarehousePage: View {
                                 ForEach(petStore.ownedEquipmentItems) { item in
                                     EquipmentInventoryRow(
                                         item: item,
-                                        count: petStore.equipmentCount(for: item)
+                                        count: petStore.equipmentCount(for: item),
+                                        equippedItem: petStore.equippedItem(for: item.slot),
+                                        canEquip: false,
+                                        actionTitle: petStore.equippedItem(for: item.slot) == item ? "已装备" : nil,
+                                        action: {}
                                     )
                                 }
                             }
@@ -824,6 +1008,10 @@ private struct InventoryItemRow: View {
 private struct EquipmentInventoryRow: View {
     let item: EquipmentItem
     let count: Int
+    let equippedItem: EquipmentItem?
+    let canEquip: Bool
+    let actionTitle: String?
+    let action: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
@@ -833,7 +1021,7 @@ private struct EquipmentInventoryRow: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text(item.displayName)
                     .font(.subheadline)
-                Text(item.slotName)
+                Text(equipmentDetailText)
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -843,9 +1031,63 @@ private struct EquipmentInventoryRow: View {
             Text("x\(count)")
                 .font(.caption.monospacedDigit())
                 .foregroundStyle(.secondary)
+
+            if let actionTitle {
+                Button(actionTitle, action: action)
+                    .buttonStyle(.bordered)
+                    .disabled(canEquip == false)
+            }
         }
         .padding(10)
         .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 10))
+        .help(item.statSummary)
+    }
+
+    private var equipmentDetailText: String {
+        let detail = [
+            item.slotName,
+            "生命+\(item.bonusHealth)",
+            "攻击+\(item.bonusAttack)",
+            "法术+\(item.bonusSpell)",
+            "防御+\(item.bonusDefense)"
+        ].filter { $0.hasSuffix("+0") == false }
+        let base = detail.joined(separator: " · ")
+        if let equippedItem, equippedItem == item {
+            return base + " · 已穿戴"
+        }
+        return base
+    }
+}
+
+private struct EquippedSlotRow: View {
+    let slot: EquipmentSlot
+    let item: EquipmentItem?
+    let actionTitle: String
+    let canAct: Bool
+    let action: () -> Void
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Text(item?.icon ?? "◻︎")
+                .font(.system(size: 20))
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(slot.displayName)
+                    .font(.subheadline)
+                Text(item?.displayName ?? "未穿戴")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer()
+
+            Button(actionTitle, action: action)
+                .buttonStyle(.bordered)
+                .disabled(canAct == false)
+        }
+        .padding(10)
+        .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 10))
+        .help(item?.statSummary ?? "当前槽位未穿戴装备")
     }
 }
 

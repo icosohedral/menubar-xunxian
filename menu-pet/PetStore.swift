@@ -235,6 +235,96 @@ enum EquipmentItem: String, CaseIterable, Codable, Identifiable {
             return "武器"
         }
     }
+
+    var slot: EquipmentSlot {
+        switch self {
+        case .noviceHat:
+            return .hat
+        case .noviceRobe:
+            return .robe
+        case .novicePants:
+            return .pants
+        case .noviceWeapon:
+            return .weapon
+        }
+    }
+
+    var bonusHealth: Int {
+        switch self {
+        case .noviceHat:
+            return 12
+        case .noviceRobe:
+            return 20
+        case .novicePants:
+            return 16
+        case .noviceWeapon:
+            return 0
+        }
+    }
+
+    var bonusAttack: Int {
+        switch self {
+        case .noviceWeapon:
+            return 4
+        default:
+            return 0
+        }
+    }
+
+    var bonusSpell: Int {
+        switch self {
+        case .noviceWeapon:
+            return 4
+        default:
+            return 0
+        }
+    }
+
+    var bonusDefense: Int {
+        switch self {
+        case .noviceHat:
+            return 1
+        case .noviceRobe:
+            return 2
+        case .novicePants:
+            return 1
+        case .noviceWeapon:
+            return 0
+        }
+    }
+
+    var statSummary: String {
+        [
+            bonusHealth > 0 ? "生命值 +\(bonusHealth)" : nil,
+            bonusAttack > 0 ? "攻击力 +\(bonusAttack)" : nil,
+            bonusSpell > 0 ? "法术效果 +\(bonusSpell)" : nil,
+            bonusDefense > 0 ? "防御力 +\(bonusDefense)" : nil
+        ]
+        .compactMap { $0 }
+        .joined(separator: "\n")
+    }
+}
+
+enum EquipmentSlot: String, CaseIterable, Codable, Identifiable {
+    case hat
+    case robe
+    case pants
+    case weapon
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .hat:
+            return "帽子"
+        case .robe:
+            return "衣服"
+        case .pants:
+            return "裤子"
+        case .weapon:
+            return "武器"
+        }
+    }
 }
 
 enum HuntMap: String, CaseIterable, Codable, Identifiable {
@@ -471,6 +561,7 @@ struct PetState: Codable, Identifiable {
     var danceNextTickAt: Date?
     var learnedSkills: [ActiveSkill]
     var equippedSkills: [ActiveSkill]
+    var equippedItems: [EquipmentSlot: EquipmentItem]
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -493,6 +584,7 @@ struct PetState: Codable, Identifiable {
         case danceNextTickAt
         case learnedSkills
         case equippedSkills
+        case equippedItems
         case workEndDate
         case workCooldownEndDate
         case pendingWorkReward
@@ -512,7 +604,8 @@ struct PetState: Codable, Identifiable {
         isDancing: Bool = false,
         danceNextTickAt: Date? = nil,
         learnedSkills: [ActiveSkill] = [],
-        equippedSkills: [ActiveSkill] = []
+        equippedSkills: [ActiveSkill] = [],
+        equippedItems: [EquipmentSlot: EquipmentItem] = [:]
     ) {
         self.id = type.id
         self.type = type
@@ -529,6 +622,7 @@ struct PetState: Codable, Identifiable {
         self.danceNextTickAt = danceNextTickAt
         self.learnedSkills = learnedSkills
         self.equippedSkills = Array(equippedSkills.prefix(3))
+        self.equippedItems = equippedItems
     }
 
     init(from decoder: Decoder) throws {
@@ -542,6 +636,8 @@ struct PetState: Codable, Identifiable {
         danceNextTickAt = try container.decodeIfPresent(Date.self, forKey: .danceNextTickAt)
         learnedSkills = try container.decodeIfPresent([ActiveSkill].self, forKey: .learnedSkills) ?? []
         equippedSkills = Array((try container.decodeIfPresent([ActiveSkill].self, forKey: .equippedSkills) ?? []).prefix(3))
+        equippedItems = try container.decodeIfPresent([EquipmentSlot: EquipmentItem].self, forKey: .equippedItems) ?? [:]
+        equippedItems = equippedItems.filter { $0.value.slot == $0.key }
         experience = try container.decodeIfPresent(Int.self, forKey: .experience) ?? 0
         injury = min(max(try container.decodeIfPresent(Int.self, forKey: .injury) ?? 0, 0), 100)
 
@@ -585,6 +681,7 @@ struct PetState: Codable, Identifiable {
         try container.encodeIfPresent(danceNextTickAt, forKey: .danceNextTickAt)
         try container.encode(learnedSkills, forKey: .learnedSkills)
         try container.encode(equippedSkills, forKey: .equippedSkills)
+        try container.encode(equippedItems, forKey: .equippedItems)
     }
 }
 
@@ -703,6 +800,7 @@ final class PetStore: ObservableObject {
     var bone: Int { currentPet?.bone ?? 0 }
     var injury: Int { currentPet?.injury ?? 0 }
     var currentPetCustomName: String { currentPet?.customName ?? "" }
+    var currentEquippedItems: [EquipmentSlot: EquipmentItem] { currentPet?.equippedItems ?? [:] }
 
     var cultivationLevel: Int {
         guard let pet = currentPet else { return 1 }
@@ -730,7 +828,7 @@ final class PetStore: ObservableObject {
     }
 
     var health: Int {
-        100 + max(cultivationLevel - 1, 0) * 10
+        100 + max(cultivationLevel - 1, 0) * 10 + equippedHealthBonus
     }
 
     var displayedHealth: Int {
@@ -742,16 +840,32 @@ final class PetStore: ObservableObject {
 
     var attackPower: Int {
         guard currentPet?.type.showsAttackPower ?? true else { return 0 }
-        return 15 + max(cultivationLevel - 1, 0) * 2
+        return 15 + max(cultivationLevel - 1, 0) * 2 + equippedAttackBonus
     }
 
     var spellPower: Int {
         guard currentPet?.type.showsSpellPower ?? true else { return 0 }
-        return 15 + max(cultivationLevel - 1, 0) * 2
+        return 15 + max(cultivationLevel - 1, 0) * 2 + equippedSpellBonus
     }
 
     var defense: Int {
-        5 + max(cultivationLevel - 1, 0)
+        5 + max(cultivationLevel - 1, 0) + equippedDefenseBonus
+    }
+
+    var equippedHealthBonus: Int {
+        currentEquippedItems.values.reduce(0) { $0 + $1.bonusHealth }
+    }
+
+    var equippedAttackBonus: Int {
+        currentEquippedItems.values.reduce(0) { $0 + $1.bonusAttack }
+    }
+
+    var equippedSpellBonus: Int {
+        currentEquippedItems.values.reduce(0) { $0 + $1.bonusSpell }
+    }
+
+    var equippedDefenseBonus: Int {
+        currentEquippedItems.values.reduce(0) { $0 + $1.bonusDefense }
     }
 
     var danceButtonTitle: String {
@@ -835,6 +949,18 @@ final class PetStore: ObservableObject {
 
     func equipmentCount(for item: EquipmentItem) -> Int {
         equipmentInventory[item, default: 0]
+    }
+
+    func equippedItem(for slot: EquipmentSlot) -> EquipmentItem? {
+        currentEquippedItems[slot]
+    }
+
+    func canEquip(_ item: EquipmentItem) -> Bool {
+        equipmentCount(for: item) > 0 && equippedItem(for: item.slot) != item
+    }
+
+    func canUnequip(_ slot: EquipmentSlot) -> Bool {
+        equippedItem(for: slot) != nil
     }
 
     func canBuy(_ type: PetType) -> Bool {
@@ -970,6 +1096,31 @@ final class PetStore: ObservableObject {
             lastActionSummary = "服用\(item.displayName)，获得 \(gained) 点经验"
         }
 
+        save()
+    }
+
+    func equip(_ item: EquipmentItem) {
+        guard let index = currentPetIndex, canEquip(item) else { return }
+
+        if let previous = ownedPets[index].equippedItems[item.slot] {
+            equipmentInventory[previous, default: 0] += 1
+        }
+
+        equipmentInventory[item, default: 0] -= 1
+        if equipmentInventory[item, default: 0] <= 0 {
+            equipmentInventory[item] = nil
+        }
+
+        ownedPets[index].equippedItems[item.slot] = item
+        lastActionSummary = "已装备\(item.displayName)"
+        save()
+    }
+
+    func unequip(_ slot: EquipmentSlot) {
+        guard let index = currentPetIndex,
+              let item = ownedPets[index].equippedItems.removeValue(forKey: slot) else { return }
+        equipmentInventory[item, default: 0] += 1
+        lastActionSummary = "已卸下\(item.displayName)"
         save()
     }
 
@@ -1567,6 +1718,10 @@ final class PetStore: ObservableObject {
         updatedSession.currentMonsterLevel = nil
         updatedSession.currentSubLocation = nil
         updatedSession.currentMonsterHealth = 0
+        updatedSession.monsterSkipNextAttack = false
+        updatedSession.monsterDefenseReductionHitsRemaining = 0
+        updatedSession.monsterDamageOverTimeRoundsRemaining = 0
+        updatedSession.monsterDamageOverTimeValue = 0
         updatedSession.nextTurnAt = now.addingTimeInterval(2)
         huntSession = updatedSession
 
@@ -1622,7 +1777,7 @@ final class PetStore: ObservableObject {
     }
 
     private func rollEquipmentDrop(efficiency: Double) -> EquipmentItem? {
-        guard Double.random(in: 0...1) <= 0.5 * efficiency else { return nil }
+        guard Double.random(in: 0...1) <= 0.5 else { return nil }
         return EquipmentItem.allCases.randomElement()
     }
 
@@ -1693,7 +1848,7 @@ final class PetStore: ObservableObject {
             pet.learnedSkills.contains($0) == false && monsterLevel >= $0.requiredLevel
         }
         guard missingSkills.isEmpty == false else { return nil }
-        guard Double.random(in: 0...1) <= 0.18 * efficiency else { return nil }
+        guard Double.random(in: 0...1) <= 0.5 * efficiency else { return nil }
         guard let skill = missingSkills.randomElement(),
               let item = inventoryItem(for: skill) else { return nil }
         itemInventory[item, default: 0] += 1
