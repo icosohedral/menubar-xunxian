@@ -1,0 +1,1038 @@
+{
+  "mulberryVillage": [
+    {
+      "name": "小野猪",
+      "levelMin": 3,
+      "levelMax": 3
+    },
+    {
+      "name": "成年大野猪",
+      "levelMin": 2,
+      "levelMax": 2
+    },
+    {
+      "name": "豺",
+      "levelMin": 1,
+      "levelMax": 1
+    },
+    {
+      "name": "顺风小妖",
+      "levelMin": 3,
+      "levelMax": 5
+    },
+    {
+      "name": "顺风来",
+      "levelMin": 5,
+      "levelMax": 5
+    },
+    {
+      "name": "顺风去",
+      "levelMin": 6,
+      "levelMax": 6
+    },
+    {
+      "name": "顺风打手",
+      "levelMin": 5,
+      "levelMax": 6
+    },
+    {
+      "name": "顺风来随从",
+      "levelMin": 6,
+      "levelMax": 6
+    },
+    {
+      "name": "顺风去随从",
+      "levelMin": 5,
+      "levelMax": 5
+    },
+    {
+      "name": "胖墩小毛贼",
+      "levelMin": 5,
+      "levelMax": 5
+    },
+    {
+      "name": "矮胖小哨子",
+      "levelMin": 5,
+      "levelMax": 7
+    },
+    {
+      "name": "白鬼哨子头",
+      "levelMin": 8,
+      "levelMax": 8
+    },
+    {
+      "name": "妖艳狐狸精",
+      "levelMin": 6,
+      "levelMax": 8
+    },
+    {
+      "name": "狐媚娘丫鬟",
+      "levelMin": 8,
+      "levelMax": 9
+    },
+    {
+      "name": "狐媚娘",
+      "levelMin": 10,
+      "levelMax": 10
+    },
+    {
+      "name": "混世小妖",
+      "levelMin": 9,
+      "levelMax": 10
+    },
+    {
+      "name": "混世魔头",
+      "levelMin": 10,
+      "levelMax": 10
+    },
+    {
+      "name": "驼背老妖精",
+      "levelMin": 6,
+      "levelMax": 7
+    },
+    {
+      "name": "驼背老妖精",
+      "levelMin": 5,
+      "levelMax": 6
+    },
+    {
+      "name": "黄鼬母夜叉",
+      "levelMin": 5,
+      "levelMax": 5
+    }
+  ],
+  "ninghaiCounty": [
+    {
+      "name": "摸黑小妖",
+      "levelMin": 14,
+      "levelMax": 14
+    },
+    {
+      "name": "一惯偷",
+      "levelMin": 12,
+      "levelMax": 12
+    },
+    {
+      "name": "一溜烟",
+      "levelMin": 12,
+      "levelMax": 12
+    },
+    {
+      "name": "一阵风",
+      "levelMin": 14,
+      "levelMax": 14
+    },
+    {
+      "name": "道观偷药贼",
+      "levelMin": 18,
+      "levelMax": 19
+    },
+    {
+      "name": "翻墙窃贼",
+      "levelMin": 10,
+      "levelMax": 12
+    },
+    {
+      "name": "白脸机灵鬼",
+      "levelMin": 19,
+      "levelMax": 20
+    },
+    {
+      "name": "城楼飞贼",
+      "levelMin": 13,
+      "levelMax": 14
+    },
+    {
+      "name": "凤银娘",
+      "levelMin": 12,
+      "levelMax": 12
+    },
+    {
+      "name": "金花狐狸精",
+      "levelMin": 11,
+      "levelMax": 12
+    },
+    {
+      "name": "金花小妖",
+      "levelMin": 11,
+      "levelMax": 12
+    },
+    {
+      "name": "金花贼头",
+      "levelMin": 13,
+      "levelMax": 13
+    },
+    {
+      "name": "赛金花",
+      "levelMin": 13,
+      "levelMax": 13
+    },
+    {
+      "name": "钻风巡哨",
+      "levelMin": 13,
+      "levelMax": 14
+    },
+    {
+      "name": "钻风小奴",
+      "levelMin": 13,
+      "levelMax": 14
+    },
+    {
+      "name": "钻风随从",
+      "levelMin": 13,
+      "levelMax": 14
+    },
+    {
+      "name": "钻风巡哨头领",
+      "levelMin": 13,
+      "levelMax": 14
+    },
+    {
+      "name": "大钻风",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "老钻风",
+      "levelMin": 16,
+      "levelMax": 16
+    },
+    {
+      "name": "巡山精锐",
+      "levelMin": 21,
+      "levelMax": 22
+    },
+    {
+      "name": "巡山哨头",
+      "levelMin": 21,
+      "levelMax": 23
+    },
+    {
+      "name": "尖壳蟹怪",
+      "levelMin": 15,
+      "levelMax": 16
+    },
+    {
+      "name": "圆壳蟹怪",
+      "levelMin": 15,
+      "levelMax": 16
+    },
+    {
+      "name": "刺头蟹怪",
+      "levelMin": 16,
+      "levelMax": 17
+    },
+    {
+      "name": "海螺蟹怪",
+      "levelMin": 16,
+      "levelMax": 17
+    },
+    {
+      "name": "蟹头领",
+      "levelMin": 17,
+      "levelMax": 17
+    },
+    {
+      "name": "大螯螃蟹精",
+      "levelMin": 17,
+      "levelMax": 18
+    },
+    {
+      "name": "大螯螃蟹精",
+      "levelMin": 18,
+      "levelMax": 18
+    },
+    {
+      "name": "弯腰虾米精",
+      "levelMin": 17,
+      "levelMax": 18
+    },
+    {
+      "name": "青螯大爷",
+      "levelMin": 19,
+      "levelMax": 19
+    },
+    {
+      "name": "大旋风",
+      "levelMin": 23,
+      "levelMax": 23
+    },
+    {
+      "name": "旋风母夜叉",
+      "levelMin": 20,
+      "levelMax": 21
+    },
+    {
+      "name": "旋风小童",
+      "levelMin": 20,
+      "levelMax": 21
+    },
+    {
+      "name": "旋风路霸",
+      "levelMin": 21,
+      "levelMax": 22
+    },
+    {
+      "name": "大旋风一等跟班",
+      "levelMin": 22,
+      "levelMax": 22
+    },
+    {
+      "name": "洞府小童",
+      "levelMin": 24,
+      "levelMax": 24
+    },
+    {
+      "name": "白波辣",
+      "levelMin": 23,
+      "levelMax": 23
+    },
+    {
+      "name": "辣波白",
+      "levelMin": 23,
+      "levelMax": 23
+    },
+    {
+      "name": "黄四爷",
+      "levelMin": 25,
+      "levelMax": 25
+    },
+    {
+      "name": "洞府小童",
+      "levelMin": 24,
+      "levelMax": 24
+    },
+    {
+      "name": "黄风打手",
+      "levelMin": 25,
+      "levelMax": 25
+    },
+    {
+      "name": "黄风洞小童",
+      "levelMin": 23,
+      "levelMax": 23
+    },
+    {
+      "name": "黄风洞丫鬟",
+      "levelMin": 25,
+      "levelMax": 25
+    },
+    {
+      "name": "金镶玉",
+      "levelMin": 20,
+      "levelMax": 20
+    },
+    {
+      "name": "银玉钗",
+      "levelMin": 20,
+      "levelMax": 20
+    },
+    {
+      "name": "邪灵道童",
+      "levelMin": 25,
+      "levelMax": 25
+    },
+    {
+      "name": "白脸流寇",
+      "levelMin": 24,
+      "levelMax": 24
+    },
+    {
+      "name": "流寇头领",
+      "levelMin": 25,
+      "levelMax": 25
+    },
+    {
+      "name": "黄风洞游勇",
+      "levelMin": 24,
+      "levelMax": 24
+    },
+    {
+      "name": "爪到擒来",
+      "levelMin": 22,
+      "levelMax": 22
+    },
+    {
+      "name": "肚里明白",
+      "levelMin": 22,
+      "levelMax": 22
+    },
+    {
+      "name": "管家白福",
+      "levelMin": 25,
+      "levelMax": 25
+    },
+    {
+      "name": "小旋风",
+      "levelMin": 21,
+      "levelMax": 21
+    },
+    {
+      "name": "道观偷药贼",
+      "levelMin": 19,
+      "levelMax": 19
+    },
+    {
+      "name": "城西小混混",
+      "levelMin": 10,
+      "levelMax": 12
+    },
+    {
+      "name": "城东小混混",
+      "levelMin": 10,
+      "levelMax": 12
+    },
+    {
+      "name": "偷药小头领",
+      "levelMin": 20,
+      "levelMax": 20
+    },
+    {
+      "name": "大钳蟹头目",
+      "levelMin": 17,
+      "levelMax": 17
+    },
+    {
+      "name": "长须虾头目",
+      "levelMin": 16,
+      "levelMax": 16
+    },
+    {
+      "name": "硬背蟹头目",
+      "levelMin": 18,
+      "levelMax": 18
+    },
+    {
+      "name": "弓腰虾头目",
+      "levelMin": 18,
+      "levelMax": 18
+    },
+    {
+      "name": "巫山小妖",
+      "levelMin": 22,
+      "levelMax": 22
+    },
+    {
+      "name": "黄风洞泼妇厨娘",
+      "levelMin": 23,
+      "levelMax": 23
+    },
+    {
+      "name": "云雨婆娘",
+      "levelMin": 21,
+      "levelMax": 21
+    },
+    {
+      "name": "尖壳小头领",
+      "levelMin": 16,
+      "levelMax": 16
+    },
+    {
+      "name": "刺头小头领",
+      "levelMin": 16,
+      "levelMax": 16
+    },
+    {
+      "name": "贪嘴的熊",
+      "levelMin": 10,
+      "levelMax": 10
+    },
+    {
+      "name": "劫道母夜叉",
+      "levelMin": 20,
+      "levelMax": 21
+    },
+    {
+      "name": "劫道小童",
+      "levelMin": 20,
+      "levelMax": 21
+    },
+    {
+      "name": "劫道路霸",
+      "levelMin": 21,
+      "levelMax": 22
+    },
+    {
+      "name": "白脸奴役",
+      "levelMin": 17,
+      "levelMax": 17
+    },
+    {
+      "name": "神秘妖道",
+      "levelMin": 19,
+      "levelMax": 19
+    },
+    {
+      "name": "混世魔王黄九",
+      "levelMin": 25,
+      "levelMax": 25
+    },
+    {
+      "name": "被施法的白脸奴役",
+      "levelMin": 20,
+      "levelMax": 20
+    },
+    {
+      "name": "欺软蟹",
+      "levelMin": 10,
+      "levelMax": 10
+    },
+    {
+      "name": "护旗黄鼠狼",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "狡猾的狐狸",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "赛金花心腹",
+      "levelMin": 14,
+      "levelMax": 14
+    },
+    {
+      "name": "弱得不能再弱的看守",
+      "levelMin": 22,
+      "levelMax": 22
+    },
+    {
+      "name": "夜行偷药贼",
+      "levelMin": 19,
+      "levelMax": 20
+    },
+    {
+      "name": "凶恶的野狼",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "妖营大旗",
+      "levelMin": 30,
+      "levelMax": 30
+    },
+    {
+      "name": "麋鹿",
+      "levelMin": 12,
+      "levelMax": 22
+    },
+    {
+      "name": "抢粮妖怪",
+      "levelMin": 10,
+      "levelMax": 10
+    },
+    {
+      "name": "老东西",
+      "levelMin": 12,
+      "levelMax": 12
+    },
+    {
+      "name": "老家伙",
+      "levelMin": 14,
+      "levelMax": 14
+    },
+    {
+      "name": "老骨头",
+      "levelMin": 22,
+      "levelMax": 22
+    },
+    {
+      "name": "会变化的城楼飞贼",
+      "levelMin": 13,
+      "levelMax": 14
+    },
+    {
+      "name": "黄小钻",
+      "levelMin": 22,
+      "levelMax": 22
+    },
+    {
+      "name": "施法妖道",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "赛金花心腹",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "送信小妖",
+      "levelMin": 22,
+      "levelMax": 22
+    },
+    {
+      "name": "修练成精的妖怪",
+      "levelMin": 12,
+      "levelMax": 21
+    },
+    {
+      "name": "弓腰营头领",
+      "levelMin": 25,
+      "levelMax": 25
+    },
+    {
+      "name": "妖媚营头领",
+      "levelMin": 25,
+      "levelMax": 25
+    },
+    {
+      "name": "突击营头领",
+      "levelMin": 21,
+      "levelMax": 21
+    },
+    {
+      "name": "步军先锋头领",
+      "levelMin": 23,
+      "levelMax": 23
+    },
+    {
+      "name": "步军小彪将",
+      "levelMin": 23,
+      "levelMax": 23
+    },
+    {
+      "name": "锐健营头领",
+      "levelMin": 21,
+      "levelMax": 21
+    },
+    {
+      "name": "狐小媚",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "黄八爷",
+      "levelMin": 20,
+      "levelMax": 20
+    },
+    {
+      "name": "猎食的野猪",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "黑山猪",
+      "levelMin": 19,
+      "levelMax": 19
+    },
+    {
+      "name": "黑山猪幼崽",
+      "levelMin": 19,
+      "levelMax": 19
+    },
+    {
+      "name": "长牙野猪王",
+      "levelMin": 20,
+      "levelMax": 20
+    },
+    {
+      "name": "成年野猪",
+      "levelMin": 10,
+      "levelMax": 10
+    },
+    {
+      "name": "幼年野猪",
+      "levelMin": 10,
+      "levelMax": 10
+    },
+    {
+      "name": "猪崽子",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "黑鬃野猪王",
+      "levelMin": 20,
+      "levelMax": 20
+    },
+    {
+      "name": "强壮野猪王",
+      "levelMin": 20,
+      "levelMax": 20
+    },
+    {
+      "name": "健壮黑熊王",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "熊瞎子",
+      "levelMin": 16,
+      "levelMax": 16
+    },
+    {
+      "name": "黑鬃野猪幼崽",
+      "levelMin": 16,
+      "levelMax": 16
+    },
+    {
+      "name": "熊崽子",
+      "levelMin": 10,
+      "levelMax": 10
+    },
+    {
+      "name": "灰狼",
+      "levelMin": 11,
+      "levelMax": 11
+    },
+    {
+      "name": "野狼",
+      "levelMin": 16,
+      "levelMax": 16
+    },
+    {
+      "name": "恶狼",
+      "levelMin": 19,
+      "levelMax": 19
+    },
+    {
+      "name": "狼崽子",
+      "levelMin": 10,
+      "levelMax": 10
+    },
+    {
+      "name": "利齿狼王",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "獠牙狼王",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "强壮狼王",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "赤尾狐狸",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "赤艳狐狸",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "火尾狐狸",
+      "levelMin": 15,
+      "levelMax": 15
+    },
+    {
+      "name": "狐狸崽子",
+      "levelMin": 10,
+      "levelMax": 10
+    }
+  ],
+  "shitangCounty": [
+    {
+      "name": "青皮无赖",
+      "levelMin": 22,
+      "levelMax": 24
+    },
+    {
+      "name": "癞皮混混",
+      "levelMin": 22,
+      "levelMax": 24
+    },
+    {
+      "name": "癞皮小头领",
+      "levelMin": 24,
+      "levelMax": 24
+    },
+    {
+      "name": "浪里花来",
+      "levelMin": 24,
+      "levelMax": 24
+    },
+    {
+      "name": "癞皮恶棍",
+      "levelMin": 23,
+      "levelMax": 25
+    },
+    {
+      "name": "红皮小哨",
+      "levelMin": 24,
+      "levelMax": 26
+    },
+    {
+      "name": "青皮喽啰",
+      "levelMin": 24,
+      "levelMax": 26
+    },
+    {
+      "name": "游荡蟹怪",
+      "levelMin": 24,
+      "levelMax": 26
+    },
+    {
+      "name": "癞皮门卫",
+      "levelMin": 25,
+      "levelMax": 26
+    },
+    {
+      "name": "水里波去",
+      "levelMin": 26,
+      "levelMax": 26
+    },
+    {
+      "name": "癞皮打手",
+      "levelMin": 25,
+      "levelMax": 27
+    },
+    {
+      "name": "白壳蟹妖",
+      "levelMin": 25,
+      "levelMax": 26
+    },
+    {
+      "name": "圆壳蟹妖",
+      "levelMin": 25,
+      "levelMax": 26
+    },
+    {
+      "name": "癞皮头领",
+      "levelMin": 26,
+      "levelMax": 27
+    },
+    {
+      "name": "虾皮小校",
+      "levelMin": 26,
+      "levelMax": 27
+    },
+    {
+      "name": "癞八皮",
+      "levelMin": 28,
+      "levelMax": 28
+    },
+    {
+      "name": "偷粮蝗虫小妖",
+      "levelMin": 27,
+      "levelMax": 29
+    },
+    {
+      "name": "抢粮蛐先锋",
+      "levelMin": 28,
+      "levelMax": 30
+    },
+    {
+      "name": "劫粮蚱先锋",
+      "levelMin": 28,
+      "levelMax": 30
+    },
+    {
+      "name": "守营蝗虫精",
+      "levelMin": 28,
+      "levelMax": 29
+    },
+    {
+      "name": "放哨蟋蟀怪",
+      "levelMin": 28,
+      "levelMax": 29
+    },
+    {
+      "name": "翅头青",
+      "levelMin": 30,
+      "levelMax": 30
+    },
+    {
+      "name": "青头翅",
+      "levelMin": 30,
+      "levelMax": 30
+    },
+    {
+      "name": "采食蝶妖",
+      "levelMin": 31,
+      "levelMax": 31
+    },
+    {
+      "name": "遍地走",
+      "levelMin": 32,
+      "levelMax": 32
+    },
+    {
+      "name": "运粮强盗",
+      "levelMin": 29,
+      "levelMax": 31
+    },
+    {
+      "name": "粮道护卫",
+      "levelMin": 29,
+      "levelMax": 31
+    },
+    {
+      "name": "督粮刀斧手",
+      "levelMin": 32,
+      "levelMax": 32
+    },
+    {
+      "name": "路边劫道虫妖",
+      "levelMin": 30,
+      "levelMax": 32
+    },
+    {
+      "name": "盘陀岭岗哨",
+      "levelMin": 31,
+      "levelMax": 33
+    },
+    {
+      "name": "盘陀岭伏兵",
+      "levelMin": 31,
+      "levelMax": 33
+    },
+    {
+      "name": "盘陀岭头目",
+      "levelMin": 33,
+      "levelMax": 33
+    },
+    {
+      "name": "满天飞",
+      "levelMin": 34,
+      "levelMax": 34
+    },
+    {
+      "name": "金翅洞精兵",
+      "levelMin": 32,
+      "levelMax": 33
+    },
+    {
+      "name": "金翅护卫",
+      "levelMin": 32,
+      "levelMax": 33
+    },
+    {
+      "name": "毒尾头领",
+      "levelMin": 32,
+      "levelMax": 33
+    },
+    {
+      "name": "蝴蝶侍女",
+      "levelMin": 32,
+      "levelMax": 33
+    },
+    {
+      "name": "金翅怪",
+      "levelMin": 36,
+      "levelMax": 36
+    },
+    {
+      "name": "青皮虾小探",
+      "levelMin": 33,
+      "levelMax": 35
+    },
+    {
+      "name": "癞皮小探",
+      "levelMin": 33,
+      "levelMax": 34
+    },
+    {
+      "name": "黑脊梁",
+      "levelMin": 35,
+      "levelMax": 35
+    },
+    {
+      "name": "凿坝河妖",
+      "levelMin": 34,
+      "levelMax": 36
+    },
+    {
+      "name": "凿坝监工",
+      "levelMin": 34,
+      "levelMax": 36
+    },
+    {
+      "name": "白肚皮",
+      "levelMin": 36,
+      "levelMax": 36
+    },
+    {
+      "name": "准备砸坝的河妖",
+      "levelMin": 34,
+      "levelMax": 35
+    },
+    {
+      "name": "黑鱼监工",
+      "levelMin": 34,
+      "levelMax": 35
+    },
+    {
+      "name": "黑鱼巡哨",
+      "levelMin": 34,
+      "levelMax": 35
+    },
+    {
+      "name": "黑老三",
+      "levelMin": 36,
+      "levelMax": 36
+    },
+    {
+      "name": "闹事水府家丁",
+      "levelMin": 35,
+      "levelMax": 36
+    },
+    {
+      "name": "鼓舌水府侍女",
+      "levelMin": 35,
+      "levelMax": 36
+    },
+    {
+      "name": "游说文龟",
+      "levelMin": 36,
+      "levelMax": 36
+    },
+    {
+      "name": "野波兴蟹打手",
+      "levelMin": 36,
+      "levelMax": 37
+    },
+    {
+      "name": "野波兴蛤蟆恶徒",
+      "levelMin": 36,
+      "levelMax": 37
+    },
+    {
+      "name": "野波兴虾探子",
+      "levelMin": 36,
+      "levelMax": 37
+    },
+    {
+      "name": "蛤蟆税役",
+      "levelMin": 37,
+      "levelMax": 38
+    },
+    {
+      "name": "水府白鱼打手",
+      "levelMin": 37,
+      "levelMax": 38
+    },
+    {
+      "name": "水府黑鱼巡哨",
+      "levelMin": 37,
+      "levelMax": 38
+    },
+    {
+      "name": "水府龟浑帐",
+      "levelMin": 37,
+      "levelMax": 38
+    },
+    {
+      "name": "龟税吏",
+      "levelMin": 38,
+      "levelMax": 38
+    },
+    {
+      "name": "横波兴",
+      "levelMin": 39,
+      "levelMax": 39
+    },
+    {
+      "name": "甲算盘",
+      "levelMin": 39,
+      "levelMax": 39
+    }
+  ]
+}
